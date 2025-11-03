@@ -1,0 +1,7 @@
+{
+   "name": "binary-search-tree",
+   "version": "1.0.0",
+   "author": "Zoie Boyd (https://github.com/ZoieBoyd)",
+   "main": "main.js",
+   "type": "module"
+}
