@@ -68,9 +68,32 @@ export class Tree {
       return node;
    }
 
-   levelOrderForEach(callback) {}
+   levelOrderForEach(callback) {
+      if (!callback) throw new Error("Callback is required");
 
-   inOrderForEach(callback) {}
+      const levelOrderList = [];
+      const queue = [this.root];
+
+      while (queue.length > 0) {
+         const node = queue.shift();
+         if (node.left !== null) queue.push(node.left);
+         if (node.right !== null) queue.push(node.right);
+         levelOrderList.push(callback(node));
+      }
+      return levelOrderList;
+   }
+
+   inOrderForEach(callback) {
+      // left subtree -> root -> right subtree
+   }
+
+   preOrderForEach(callback) {
+      // root -> left subtree -> right subtree
+   }
+
+   postOrderForEach(callback) {
+      // left subtree -> right subtree -> root
+   }
 
    height(value) {}
 
