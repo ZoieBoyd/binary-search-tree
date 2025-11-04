@@ -1,5 +1,5 @@
 import { Tree } from "./tree.js";
 
-const bst = new Tree([1, 4, 2, 6, 44, 2]);
-bst.insert(234);
+const bst = new Tree([2, 6, 1, 3, 19, 4, 36, 209, 1]);
+
 bst.prettyPrint();
