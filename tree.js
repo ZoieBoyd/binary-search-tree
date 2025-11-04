@@ -83,16 +83,34 @@ export class Tree {
       return levelOrderList;
    }
 
-   inOrderForEach(callback) {
-      // left subtree -> root -> right subtree
+   inOrderForEach(callback, node = this.root, inOrderList = []) {
+      if (node === null) return inOrderList;
+
+      this.inOrderForEach(callback, node.left, inOrderList);
+      inOrderList.push(callback(node));
+      this.inOrderForEach(callback, node.right, inOrderList);
+
+      return inOrderList;
    }
 
-   preOrderForEach(callback) {
-      // root -> left subtree -> right subtree
+   preOrderForEach(callback, node = this.root, preOrderList = []) {
+      if (node === null) return preOrderList;
+
+      preOrderList.push(callback(node));
+      this.preOrderForEach(callback, node.left, preOrderList);
+      this.preOrderForEach(callback, node.right, preOrderList);
+
+      return preOrderList;
    }
 
-   postOrderForEach(callback) {
-      // left subtree -> right subtree -> root
+   postOrderForEach(callback, node = this.root, postOrderList = []) {
+      if (node === null) return postOrderList;
+
+      this.postOrderForEach(callback, node.left, postOrderList);
+      this.postOrderForEach(callback, node.right, postOrderList);
+      postOrderList.push(callback(node));
+
+      return postOrderList;
    }
 
    height(value) {}
