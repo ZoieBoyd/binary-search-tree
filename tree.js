@@ -58,11 +58,10 @@ export class Tree {
 
    find(value) {
       let node = this.root;
-      while (node.value !== value) {
-         if (node.value > value) {
-            node = node.left;
-         } else {
-            node = node.right;
+      while (node) {
+         if (node.value === value) return node;
+         else {
+            node = node.value > value ? node.left : node.right;
          }
       }
       return node;
@@ -84,6 +83,8 @@ export class Tree {
    }
 
    inOrderForEach(callback, node = this.root, inOrderList = []) {
+      if (!callback) throw new Error("Callback is required");
+
       if (node === null) return inOrderList;
 
       this.inOrderForEach(callback, node.left, inOrderList);
@@ -94,6 +95,8 @@ export class Tree {
    }
 
    preOrderForEach(callback, node = this.root, preOrderList = []) {
+      if (!callback) throw new Error("Callback is required");
+
       if (node === null) return preOrderList;
 
       preOrderList.push(callback(node));
@@ -104,6 +107,8 @@ export class Tree {
    }
 
    postOrderForEach(callback, node = this.root, postOrderList = []) {
+      if (!callback) throw new Error("Callback is required");
+
       if (node === null) return postOrderList;
 
       this.postOrderForEach(callback, node.left, postOrderList);
@@ -113,7 +118,15 @@ export class Tree {
       return postOrderList;
    }
 
-   height(value) {}
+   height(value, node = this.find(value)) {
+      if (!this.find(value)) return null;
+
+      if (node === null) return -1;
+
+      const leftHeight = this.height(value, node.left);
+      const rightHeight = this.height(value, node.right);
+      return Math.max(leftHeight, rightHeight) + 1;
+   }
 
    depth(value) {}
 
