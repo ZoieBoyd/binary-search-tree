@@ -121,14 +121,20 @@ export class Tree {
    height(value, node = this.find(value)) {
       if (!this.find(value)) return null;
 
-      if (node === null) return -1;
-
+      if (!node) return -1;
       const leftHeight = this.height(value, node.left);
       const rightHeight = this.height(value, node.right);
       return Math.max(leftHeight, rightHeight) + 1;
    }
 
-   depth(value) {}
+   depth(value, node = this.root) {
+      if (!this.find(value)) return null;
+
+      if (node.value === value) return 0;
+      let result =
+         node.value > value ? this.depth(value, node.left) : this.depth(value, node.right);
+      return result + 1;
+   }
 
    isBalanced() {}
 
