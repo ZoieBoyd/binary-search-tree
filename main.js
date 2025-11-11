@@ -1,7 +1,15 @@
 import { Tree } from "./tree.js";
 
-const tree = new Tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+let randArr = new Array();
+for (let i = 0; i < 100; i++) {
+   randArr.push(Math.floor(Math.random() * 100) + 1);
+}
+const tree = new Tree(randArr);
+console.log(tree.isBalanced());
 
-console.log(tree.depth(19));
-console.log(tree.height(19));
-tree.prettyPrint();
+// Unbalancing tree
+tree.insert(202);
+tree.insert(210);
+tree.insert(102);
+tree.insert(9029);
+console.log(tree.isBalanced());

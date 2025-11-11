@@ -8,7 +8,6 @@ export class Tree {
 
    buildTree(arr) {
       if (arr.length === 0) return null;
-
       const midIndex = Math.floor(arr.length / 2);
       const node = new Node(arr[midIndex]);
       node.left = this.buildTree(arr.slice(0, midIndex));
@@ -136,7 +135,12 @@ export class Tree {
       return result + 1;
    }
 
-   isBalanced() {}
+   isBalanced() {
+      const leftHeight = this.height(this.root.left.value);
+      const rightHeight = this.height(this.root.right.value);
+      const heightDifference = leftHeight - rightHeight;
+      return heightDifference >= -1 && heightDifference <= 1;
+   }
 
    rebalance() {}
 
