@@ -8,6 +8,7 @@ export class Tree {
 
    buildTree(arr) {
       if (arr.length === 0) return null;
+
       const midIndex = Math.floor(arr.length / 2);
       const node = new Node(arr[midIndex]);
       node.left = this.buildTree(arr.slice(0, midIndex));
@@ -142,7 +143,11 @@ export class Tree {
       return heightDifference >= -1 && heightDifference <= 1;
    }
 
-   rebalance() {}
+   rebalance() {
+      const arr = new Array();
+      this.inOrderForEach((node) => arr.push(node.value));
+      this.root = this.buildTree(arr);
+   }
 
    prettyPrint(node = this.root, prefix = "", isLeft = true) {
       if (node === null) {
